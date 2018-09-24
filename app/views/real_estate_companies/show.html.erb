@@ -15,4 +15,53 @@
     <%= @real_estate_company.synopsis %>
 </p>
 
+<h2>House Listings</h2>
+<% @real_estate_company.houses.each do |house| %>
+    <p>
+        <%= house.inspect %> <br>
+        <br><br>
+    </p>
+<% end %>
+
+<h2> Add a house listing </h2>
+<%= form_with(model: [@real_estate_company,@real_estate_company.houses.build ], local: true) do |form| %>
+    <p>
+        <%= form.label :location %> <br>
+        <%= form.text_area :location %>
+    </p>
+        <p>
+        <%= form.label :square_footage %> <br>
+        <%= form.number_field :square_footage %>
+    </p>
+    <p>
+        <%= form.label :year_built %> <br>
+        <%= form.number_field :year_built %>
+    </p>
+    <p>
+        <%= form.label :style %> <br> 
+        <%= form.text_field :style %>
+    </p>
+    <p>
+        <%= form.label :list_price %> <br>
+        <%= form.number_field :list_price %>
+    </p>
+    <p>
+        <%= form.label :floors %> <br>
+        <%= form.number_field :floors %>
+    </p>
+    <p>
+        <%= form.label :basement %> 
+        <%= form.check_box :basement %>
+    </p>
+    <p>
+        <%= form.label :current_owner %> <br>
+        <%= form.text_field :current_owner %>
+    </p>
+    <p>
+        <%= form.label :contact_information %> <br>
+        <%= form.text_area :contact_information %>
+    </p>
+    <p>
+        <%= form.submit %>
+<%end%>
     

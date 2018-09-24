@@ -1,4 +1,5 @@
 class RealEstateCompany < ApplicationRecord
+  has_many :houses
   validates :name, presence: true
   validates :website, presence: true
   #regex allows for any tld as described by https://en.wikipedia.org/wiki/List_of_Internet_top-level_domains
