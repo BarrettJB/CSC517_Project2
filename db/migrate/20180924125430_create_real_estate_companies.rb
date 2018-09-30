@@ -5,7 +5,7 @@ class CreateRealEstateCompanies < ActiveRecord::Migration[5.2]
       t.string :name
       t.string :website
       t.text :address
-      t.integer :size
+      t.string :size
       t.integer :founded
       t.decimal :revenue
       t.text :synopsis

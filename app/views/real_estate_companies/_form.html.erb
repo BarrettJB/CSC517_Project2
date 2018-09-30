@@ -28,8 +28,16 @@
     </p>
     
     <p>
-        <%= form.label :size %> <br>
-        <%= form.number_field :size %>
+        <%= form.radio_button(:size,"1-50") %>
+        <%= form.label("1-50") %> <br>
+        <%= form.radio_button(:size,"51-200") %>
+        <%= form.label("51-200") %> <br>
+        <%= form.radio_button(:size,"201-500") %>
+        <%= form.label("201-500") %> <br>
+        <%= form.radio_button(:size,"501-1000") %>
+        <%= form.label("501-1000") %> <br>
+        <%= form.radio_button(:size,"1000+") %>
+        <%= form.label("1000+") %> <br>
     </p>
     
     <p>
