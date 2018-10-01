@@ -1,0 +1,29 @@
+<h1> Houses </h1>
+
+<table>
+    <tr>
+        <th> Style </th>
+        <th> Location </th>
+        <th> List Price </th>
+        <th> </th>
+        <th> </th>
+        <th> </th>
+    </tr>
+    
+    <% @houses.each do |house| %>
+        <tr>
+            <td><%= house.style %></td>
+            <td><%= house.location %></td>
+            <td>$<%= house.list_price %></td>
+            <td><%=link_to "View", house_path(house)%></td>
+            <td> <%if house.user_id == current_user.id || current_user.is_admin%>
+                    <%=link_to "Edit", edit_house_path(house)%>
+                 <%end%></td>
+            <td> <%if house.user_id == current_user.id || current_user.is_admin%>
+                    <%= link_to "Delete", house_path(house), 
+                            method: :delete,
+                            data: {confirm: 'Are you sure?'} %>
+                 <%end%></td>
+        </tr>
+    <%end%>
+</table>

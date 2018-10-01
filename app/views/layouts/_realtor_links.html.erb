@@ -1,0 +1,6 @@
+<a><%=link_to "Edit Profile", edit_user_path(current_user)%></a>
+<% if current_user.has_company? %>
+    <a><%=link_to "View Company", real_estate_company_path(current_user.company)%></a>
+    <a><%=link_to "Add House Listing", new_house_path %></a>
+<%end%>
+<a><%=link_to "View Houses", houses_path%></a>

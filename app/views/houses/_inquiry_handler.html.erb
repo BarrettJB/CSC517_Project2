@@ -1,0 +1,12 @@
+<% if current_user.current_mode == 'hunter' %>
+    <% past_inq = @house.inquiries.where(:user  => current_user) %>
+    <% past_inq.each do |inq|%>
+        <%= inq.subject%> <br>
+        <%= inq.message%> <br>
+        <%if !inq.reply %>
+            <%= inq.reply%> <br>
+        <%end%> <br>
+    <%end%>
+    <h2> Send them a message </h2>
+    <%= render "inquiries/form" %>
+<%end%>

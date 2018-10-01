@@ -1,7 +1,6 @@
 class CreateHouses < ActiveRecord::Migration[5.2]
   def change
     create_table :houses do |t|
-      t.integer :house_id
       t.references :real_estate_company, foreign_key: true
       t.text :location
       t.decimal :square_footage

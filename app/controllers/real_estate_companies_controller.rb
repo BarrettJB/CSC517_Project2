@@ -1,5 +1,5 @@
 class RealEstateCompaniesController < ApplicationController
-
+  
   def index
     @real_estate_companies = RealEstateCompany.all
   end

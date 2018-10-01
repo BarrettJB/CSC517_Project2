@@ -1,0 +1,64 @@
+<h2> <%=@house.location%> </h2>
+<p>Square Footage: <%=@house.square_footage%></p>
+<p>Year Built: <%=@house.year_built%></p>
+<p>Style: <%=@house.style%></p>
+<p>List Price: $<%=@house.list_price%></p>
+<p>Number of Floors: <%=@house.floors%></p>
+<% if @house.basement %>
+    <p>Has a basement</p>
+<% else %>
+    <p>No basement</p>
+<% end %>
+<p>Current Owner: <%=@house.current_owner%></p>
+<p>Contact Information: <br>
+ <%=@house.user.email%> <br>
+ <%=@house.user.phone_number%></p>
+ 
+<% if current_user.current_mode == 'hunter' %>
+    <% past_inq = @house.inquiries.where(:user  => current_user) %>
+    <% if past_inq.size > 0 %>
+        <h2>Past Messages</h2>
+    <%end%>
+    <% past_inq.each do |inq|%>
+        <p>
+        <%= inq.subject%> <br>
+        <%= inq.message%> <br>
+        <%if inq.reply %>
+            <%= inq.reply%> <br>
+        <%end%>
+        <%= link_to "Edit", edit_house_inquiry_path(@house,inq) %>
+        <%= link_to "Delete", house_inquiry_path(@house,inq), method: :delete,
+                    data: {confirm: 'Are you sure?'} %>
+        </p>
+    <%end%>
+    <h2> Send them a message </h2>
+    <%= form_for [@house, @house.inquiries.new] do |f| %>
+        <p> 
+        <%= f.label :subject %> <br>
+        <%= f.text_field :subject %>
+        </p>
+    
+        <p>
+        <%= f.label :message %> <br>
+        <%= f.text_area :message %> <br>
+        </p>
+    
+        <p>
+        <%= f.submit %>
+        </p>
+    <%end%>
+<%end%>
+
+<% if current_user.current_mode == 'realtor' && (@house.real_estate_company_id == current_user.real_estate_company_id || current_user.is_admin) %>
+    <% @house.inquiries.each do |inq|%>
+        <p>
+        <%= inq.subject%> <br>
+        <%= inq.message%> <br>
+        <%= inq.user.name%> <br>
+        <%if inq.reply %>
+            <%= inq.reply%> <br>
+        <%end%>
+        <%= link_to "Reply", edit_house_inquiry_path(@house,inq) %>
+        </p>
+    <%end%>
+<%end%>
